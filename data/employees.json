@@ -1,0 +1,414 @@
+[
+    {
+        "id": "E001",
+        "name": "Alice Kim",
+        "role": "backend",
+        "skills": ["python", "fastapi", "sql", "docker", "aws", "redis", "graphql"],
+        "experience_years": 6,
+      
+        "career_path": [
+          {
+            "period": "2018-2020",
+            "company": "InnoTech Solutions",
+            "role": "Junior Backend Engineer",
+            "division": "E-Commerce Platform Team",
+            "project": "Order Processing System",
+            "description": [
+              "Implemented RESTful APIs handling 50k+ daily orders for an e-commerce platform.",
+              "Optimized SQL joins and indexing which reduced heavy report query time by 60%.",
+              "Introduced Redis caching layer for session management and hot product data.",
+              "Maintained CI pipelines using Jenkins and containerized services with Docker.",
+              "Collaborated with Data Engineering team to integrate order events into a Spark pipeline."
+            ],
+            "domain_experience": ["e-commerce", "order management", "high-volume API traffic"]
+          },
+      
+          {
+            "period": "2020-2023",
+            "company": "BlueCloud",
+            "role": "Backend Engineer",
+            "division": "AI Platform Engineering",
+            "project": "ML Model Serving Platform",
+            "description": [
+              "Designed microservices using FastAPI to serve ML models with async inference routing.",
+              "Integrated AWS Lambda + API Gateway for batch inference workflows.",
+              "Migrated large monolithic inference service → microservices architecture.",
+              "Implemented GraphQL gateway for unified access to feature store and model metadata.",
+              "Worked closely with MLOps team to containerize models and deploy on AWS EKS.",
+              "Improved inference latency by 40% by redesigning async queueing mechanism."
+            ],
+            "domain_experience": ["ml model serving", "cloud infrastructure", "async backend systems"]
+          }
+        ],
+      
+        "projects": [
+          {
+            "name": "Internal API Refactor",
+            "role": "Backend Engineer",
+            "duration_months": 8,
+            "tech_stack": ["python", "fastapi", "postgres", "docker", "k6"],
+            "responsibilities": [
+              "Refactored 20+ legacy APIs into modular FastAPI endpoints.",
+              "Introduced API versioning and automatic schema validation.",
+              "Built performance test suite using k6."
+            ],
+            "impact": [
+              "Reduced overall API latency by 40%.",
+              "Lowered on-call incidents by 30% due to more predictable API behavior.",
+              "Improved request throughput from 600 → 1,100 req/sec."
+            ],
+            "domain": "internal tools / platform backend"
+          },
+      
+          {
+            "name": "ML Serving System",
+            "role": "Lead Backend",
+            "duration_months": 12,
+            "tech_stack": ["python", "aws", "docker", "sqs", "redis"],
+            "responsibilities": [
+              "Architected async inference service supporting CPU/GPU nodes.",
+              "Created dynamic routing logic for high-burst traffic using Redis streams.",
+              "Implemented authentication/authorization for model registry.",
+              "Built SLA monitoring dashboards with CloudWatch + Grafana."
+            ],
+            "impact": [
+              "System successfully scaled to 10k req/min peak traffic.",
+              "Reduced inference cost by 25% with spot instance autoscaling.",
+              "Achieved 99.95% uptime over 12 months."
+            ],
+            "domain": "ml infrastructure"
+          }
+        ],
+      
+        "certifications": ["AWS Solutions Architect Associate"],
+        "availability": 0.8,
+        "seniority": "mid-senior"
+      },
+      {
+        "id": "E002",
+        "name": "David Park",
+        "role": "frontend",
+        "skills": ["react", "typescript", "nextjs", "css", "jest", "storybook"],
+        "experience_years": 4,
+      
+        "career_path": [
+          {
+            "period": "2019-2021",
+            "company": "WebMint Inc.",
+            "role": "Frontend Developer",
+            "division": "Customer Experience Team",
+            "project": "Customer Portal UI Revamp",
+            "description": [
+              "Rebuilt customer portal using React + TypeScript, improving page interactivity.",
+              "Introduced Storybook-based component design system across 3 product teams.",
+              "Converted legacy jQuery pages into reusable React Hook components.",
+              "Optimized initial page load by implementing dynamic import and code splitting.",
+              "Worked with Backend team to adopt GraphQL queries and schema design."
+            ],
+            "domain_experience": ["e-commerce", "customer portal", "design systems"]
+          },
+      
+          {
+            "period": "2021-2023",
+            "company": "SoftLane Corp",
+            "role": "Frontend Developer",
+            "division": "Admin Platform Team",
+            "project": "Admin Analytics Dashboard",
+            "description": [
+              "Designed complex dashboards using React, Recharts, and TypeScript.",
+              "Built internal UI component library enabling 30% faster FE delivery speed.",
+              "Implemented Jest + React Testing Library suite raising test coverage from 22% → 78%.",
+              "Improved Lighthouse accessibility score from 78 → 97.",
+              "Participated in UX research to simplify multi-step flows."
+            ],
+            "domain_experience": ["enterprise admin tools", "analytics dashboards", "internal platforms"]
+          }
+        ],
+      
+        "projects": [
+          {
+            "name": "Customer Portal",
+            "role": "Frontend Developer",
+            "duration_months": 14,
+            "tech_stack": ["react", "typescript", "graphql", "storybook"],
+            "responsibilities": [
+              "Developed UI components following atomic design principles.",
+              "Improved page accessibility according to WCAG AA standards.",
+              "Integrated frontend build pipelines with GitHub Actions."
+            ],
+            "impact": [
+              "Reduced FE bug rate by 32%.",
+              "Improved repeat visit rate by 12% due to better UX.",
+              "Component library adopted by 3 internal product teams."
+            ],
+            "domain": "customer experience / e-commerce"
+          }
+        ],
+      
+        "certifications": [],
+        "availability": 1.0,
+        "seniority": "mid"
+      },
+      {
+        "id": "E003",
+        "name": "Hannah Lee",
+        "role": "mlops",
+        "skills": ["docker", "kubernetes", "aws", "terraform", "python", "prometheus", "grafana"],
+        "experience_years": 5,
+      
+        "career_path": [
+          {
+            "period": "2017-2020",
+            "company": "DataForge",
+            "role": "DevOps Engineer",
+            "division": "Infrastructure Automation",
+            "project": "CI/CD Modernization",
+            "description": [
+              "Automated Jenkins pipelines for backend and data engineering teams.",
+              "Wrote Terraform modules to standardize EC2, VPC, and IAM provisioning.",
+              "Deployed internal artifacts registry using Nexus + S3.",
+              "Introduced container-based build pipelines using Docker.",
+              "Monitored infra health with Prometheus and Grafana dashboards."
+            ],
+            "domain_experience": ["infrastructure automation", "ci/cd", "cloud provisioning"]
+          },
+      
+          {
+            "period": "2020-2024",
+            "company": "VisionAI",
+            "role": "MLOps Engineer",
+            "division": "ML Platform Team",
+            "project": "Feature Store + Real-Time Model Deployment",
+            "description": [
+              "Built scalable feature pipelines using Spark Streaming + Kafka.",
+              "Managed model deployment and rollout using AWS EKS.",
+              "Implemented canary deployments and automated rollback scripts.",
+              "Designed monitoring for drift detection and model performance degradation.",
+              "Performed emergency production recoveries for GPU node saturation issues."
+            ],
+            "domain_experience": ["mlops", "feature store", "real-time ml serving"]
+          }
+        ],
+      
+        "projects": [
+          {
+            "name": "Feature Store Development",
+            "role": "MLOps Engineer",
+            "duration_months": 10,
+            "tech_stack": ["kubernetes", "aws", "terraform", "spark", "docker"],
+            "responsibilities": [
+              "Built model materialization pipeline in Kubernetes.",
+              "Automated infrastructure provisioning for ML workflows.",
+              "Designed metric dashboards for feature freshness and data integrity."
+            ],
+            "impact": [
+              "Achieved 99.9% uptime for model serving.",
+              "Reduced feature freshness lag by 80%.",
+              "Standardized ML infra for 7 ML teams."
+            ],
+            "domain": "mlops / infrastructure"
+          }
+        ],
+      
+        "certifications": ["AWS DevOps Engineer Professional"],
+        "availability": 0.9,
+        "seniority": "senior"
+      },
+      {
+        "id": "E004",
+        "name": "Chris Yu",
+        "role": "backend",
+        "skills": ["java", "springboot", "mysql", "kafka", "redis", "grpc"],
+        "experience_years": 7,
+      
+        "career_path": [
+          {
+            "period": "2016-2019",
+            "company": "CloudCom",
+            "role": "Backend Developer",
+            "division": "Payment Gateway",
+            "project": "Payment Authorization System",
+            "description": [
+              "Built transaction authorization workflow using SpringBoot.",
+              "Integrated Kafka event streaming for audit + fraud pipelines.",
+              "Optimized MySQL replication lag and schema partitioning.",
+              "Implemented gRPC microservice for payment validation.",
+              "Handled PCI-compliant secure logging and storage."
+            ],
+            "domain_experience": ["fintech", "payments", "fraud prevention"]
+          },
+      
+          {
+            "period": "2019-2024",
+            "company": "FinFlow",
+            "role": "Senior Backend Engineer",
+            "division": "Batch Processing Platform",
+            "project": "Billing Batch Migration",
+            "description": [
+              "Migrated monthly billing engine from legacy Java EE to SpringBoot batch.",
+              "Designed multi-threaded billing executor improving throughput by 4x.",
+              "Implemented Kafka-based job event tracking system.",
+              "Built settlement reconciliation service with auto-correction logic.",
+              "Led 3 backend developers and reviewed design proposals."
+            ],
+            "domain_experience": ["fintech", "billing systems", "stream processing"]
+          }
+        ],
+      
+        "projects": [
+          {
+            "name": "Payment Service",
+            "role": "Lead Developer",
+            "duration_months": 16,
+            "tech_stack": ["java", "springboot", "kafka", "mysql"],
+            "responsibilities": [
+              "Designed scalable high-concurrency payment workflow.",
+              "Integrated fraud detection rule engine.",
+              "Built test harness for simulating high-volume card transactions."
+            ],
+            "impact": [
+              "Increased throughput by 55% under peak load.",
+              "Reduced fraudulent transaction rate by 12% after rule optimization.",
+              "Payment downtime reduced from 2.4h/month → 20min/month."
+            ],
+            "domain": "fintech / payment processing"
+          }
+        ],
+      
+        "certifications": ["Oracle Java Professional"],
+        "availability": 0.7,
+        "seniority": "senior"
+      },
+      {
+        "id": "E005",
+        "name": "Emily Choi",
+        "role": "data",
+        "skills": ["python", "pandas", "spark", "airflow", "s3", "redshift", "athena"],
+        "experience_years": 5,
+      
+        "career_path": [
+          {
+            "period": "2019-2021",
+            "company": "RetailData",
+            "role": "Data Analyst",
+            "division": "Sales Analytics",
+            "project": "Sales BI Pipeline",
+            "description": [
+              "Automated Excel → Redshift migration workflows.",
+              "Implemented ETL logic in Python using Pandas and SQL.",
+              "Built dashboard datasets for Tableau analytics.",
+              "Improved data freshness from daily → hourly.",
+              "Collaborated with Engineering to expose BI APIs."
+            ],
+            "domain_experience": ["retail analytics", "bi pipelines"]
+          },
+      
+          {
+            "period": "2021-2024",
+            "company": "FlowData",
+            "role": "Data Engineer",
+            "division": "Data Platform",
+            "project": "ETL Modernization Project",
+            "description": [
+              "Migrated legacy ETL pipelines into Spark on EMR.",
+              "Implemented DAG orchestration using Airflow.",
+              "Built S3-based data lake with optimized partitioning.",
+              "Introduced QA framework for ETL input-validation.",
+              "Built CDC pipeline for sales and inventory tables."
+            ],
+            "domain_experience": ["data engineering", "etl pipeline", "cloud data lakes"]
+          }
+        ],
+      
+        "projects": [
+          {
+            "name": "ETL Pipeline Modernization",
+            "role": "Data Engineer",
+            "duration_months": 11,
+            "tech_stack": ["spark", "airflow", "aws", "redshift"],
+            "responsibilities": [
+              "Rewrote 40+ ETL jobs from on-prem SQL server to Spark.",
+              "Implemented S3 lifecycle policies for storage optimization.",
+              "Built lineage tracking dashboards."
+            ],
+            "impact": [
+              "ETL cost reduced by 35%.",
+              "Processing time dropped from 3 hours → 50 minutes.",
+              "Data SLA reliability increased to 99.8%."
+            ],
+            "domain": "data engineering / etl"
+          }
+        ],
+      
+        "certifications": [],
+        "availability": 1.0,
+        "seniority": "mid-senior"
+      },
+      {
+        "id": "E006",
+        "name": "Ryan Ko",
+        "role": "frontend",
+        "skills": ["react", "vue", "typescript", "tailwind", "jest"],
+        "experience_years": 3,
+      
+        "career_path": [
+          {
+            "period": "2020-2022",
+            "company": "PlexDesign",
+            "role": "Frontend Developer",
+            "division": "Marketing UI Team",
+            "project": "Landing Page Rebuild",
+            "description": [
+              "Rebuilt marketing landing pages using Vue and Tailwind.",
+              "Implemented image lazy-loading for SEO performance.",
+              "Collaborated with designers to implement 20+ marketing components.",
+              "Optimized CLS/TTFB/LCP for mobile traffic.",
+              "Introduced A/B testing using Google Optimize."
+            ],
+            "domain_experience": ["marketing ui", "seo optimization", "landing pages"]
+          },
+      
+          {
+            "period": "2022-2024",
+            "company": "MobisSoft",
+            "role": "Frontend Developer",
+            "division": "Product Platform Team",
+            "project": "Product UI Component Library",
+            "description": [
+              "Built React + TypeScript based shared UI library used by 5 teams.",
+              "Created form builder module handling 40+ input types.",
+              "Integrated visual regression tests using Chromatic.",
+              "Refactored legacy CSS codebase into Tailwind CSS.",
+              "Improved bundle size by implementing tree-shaking and code splitting."
+            ],
+            "domain_experience": ["frontend architecture", "design systems", "component libraries"]
+          }
+        ],
+      
+        "projects": [
+          {
+            "name": "Product UI Platform",
+            "role": "Frontend Developer",
+            "duration_months": 10,
+            "tech_stack": ["react", "typescript", "tailwind"],
+            "responsibilities": [
+              "Developed core components for internal UI framework.",
+              "Built form builder system used by onboarding and admin portals.",
+              "Implemented accessibility for screen readers."
+            ],
+            "impact": [
+              "Reduced UI development time by ~40%.",
+              "Lowered CSS bundle size by 45%.",
+              "Adopted by 5 product teams organization-wide."
+            ],
+            "domain": "product-ui / design-system"
+          }
+        ],
+      
+        "certifications": [],
+        "availability": 0.9,
+        "seniority": "mid"
+      }
+
+
+]

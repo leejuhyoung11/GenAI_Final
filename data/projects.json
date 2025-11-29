@@ -1,0 +1,97 @@
+[
+    {
+        "project_id": "P100",
+        "name": "Real-Time Payment Fraud Detection Platform",
+        "domain": "fintech",
+        "description": "A real-time fraud detection system for credit card transactions with sub-second model inference.",
+      
+        "objectives": [
+          "Detect fraudulent transactions under 300ms latency",
+          "Build scalable Kafka → Feature Store → Model Serving pipeline",
+          "Deploy models to AWS EKS with autoscaling"
+        ],
+      
+        "required_roles": [
+          {"role": "backend", "count": 1},
+          {"role": "mlops", "count": 1},
+          {"role": "data", "count": 1}
+        ],
+      
+        "tech_stack": [
+          "kafka", "spark streaming", "python", "fastapi",
+          "aws eks", "docker", "kubernetes"
+        ],
+      
+        "preferred_experience": [
+          "fraud detection",
+          "real-time data pipeline",
+          "credit card transaction systems"
+        ],
+      
+        "duration_months": 6,
+        "priority": "high"
+      },
+      {
+        "project_id": "P101",
+        "name": "Product Recommendation Personalization Engine",
+        "domain": "e-commerce",
+        "description": "A ranking and recommendation engine using user behavior data collected from web and mobile applications.",
+      
+        "objectives": [
+          "Create personalized product ranking model",
+          "Build feature pipelines for user-event data",
+          "Enable A/B testing framework for ranking strategies"
+        ],
+      
+        "required_roles": [
+          {"role": "backend", "count": 1},
+          {"role": "data", "count": 1},
+          {"role": "mlops", "count": 1}
+        ],
+      
+        "tech_stack": [
+          "python", "tensorflow", "spark", "airflow",
+          "redis", "kubernetes", "aws lambda"
+        ],
+      
+        "preferred_experience": [
+          "recommendation systems",
+          "user behavior analytics",
+          "ETL pipeline building"
+        ],
+      
+        "duration_months": 5,
+        "priority": "medium"
+      },
+      {
+        "project_id": "P106",
+        "name": "Blockchain Transaction Explorer",
+        "domain": "blockchain",
+        "description": "A web-based explorer visualizing blockchain transaction flows and wallet activity.",
+      
+        "objectives": [
+          "Build API service indexing blockchain transactions",
+          "Implement wallet activity visualization",
+          "Ensure fast incremental block parsing"
+        ],
+      
+        "required_roles": [
+          {"role": "backend", "count": 1},
+          {"role": "frontend", "count": 1}
+        ],
+      
+        "tech_stack": [
+          "node.js", "postgresql", "redis", "react",
+          "docker", "websockets"
+        ],
+      
+        "preferred_experience": [
+          "blockchain data structures",
+          "indexing pipelines",
+          "real-time visualization"
+        ],
+      
+        "duration_months": 5,
+        "priority": "medium"
+      }
+]
