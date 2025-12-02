@@ -2,6 +2,7 @@
 from utils.prompt_loader import load_prompt
 from src.models.provider_factory import LLMProviderFactory
 from utils.load_config import load_config
+from src.graph.state import MatchingState
 
 import json
 
@@ -12,23 +13,58 @@ router_llm = LLMProviderFactory.load_from_config(router_model_cfg)
 
 
 
-def router_agent(state):
+def router_agent(state: MatchingState):
     text = state["requirement_text"]
 
     prompt_template = load_prompt("router_agent.prompt")
     prompt = prompt_template.format(user_message=text)
 
-    response = router_llm.call(prompt)
+    # Call LLM
+    raw_response = router_llm.call(prompt)
 
-    print("==== RAW RESPONSE ====")
-    print(response)
-
+    # Parse JSON
     try:
-        data = json.loads(response)
-        print("\n==== PARSED JSON ====")
-        print(json.dumps(data, indent=2))
+        router_config = json.loads(raw_response)
     except Exception as e:
-        print("\n[ERROR] JSON parsing failed:", e)
-    
+        print("[ERROR] RouterAgent JSON Parse Failed:", e)
+        router_config = {
+            "activate_matchers": {
+                "skill_matcher": True,
+                "domain_matcher": True,
+                "experience_matcher": True,
+                "seniority_matcher": True,
+                "availability_matcher": True,
+            },
+            "weights": {
+                "skill_matcher": 0.3,
+                "domain_matcher": 0.15,
+                "experience_matcher": 0.25,
+                "seniority_matcher": 0.2,
+                "availability_matcher": 0.1,
+            },
+            "rules": {
+                "exclude": [],
+                "include": [],
+                "min_experience_years": None,
+                "special_note": [],
+            }
+        }
 
-    
+    print("\n==== PARSED ROUTER RESULT ====")
+    print(json.dumps(router_config, indent=2))
+
+    # Extract fields directly for convenience
+    activate = router_config.get("activate_matchers", {})
+    weights = router_config.get("weights", {})
+    rules = router_config.get("rules", {})
+
+    # Update state so next nodes can use it
+    router_config = {
+        "activate_matchers": activate,
+        "weights": weights,
+        "rules": rules,
+    }
+
+    return {
+        "router_config": router_config
+    }

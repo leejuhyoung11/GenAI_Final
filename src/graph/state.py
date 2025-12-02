@@ -23,24 +23,24 @@ class MatchingState(TypedDict):
     requirement_text: str
     project: ProjectRequirement
     employees: List[Dict]
-    partial_scores: Dict[str, Any]
+    router_config: Dict[str, Any]
+    role_scores: Dict[str, Dict[str, Dict[str, float]]]
     final_result: Dict[str, Any]
 
+# role_scores_structure
+# {
+    #   "backend": {
+    #       "E001": {
+    #           "skill_score": 0.85,
+    #           "domain_score": 0.40,
+    #           "experience_score": 0.70
+    #       },
+    #       "E002": { ... }
+    #   },
+    #   "mlops": { ... }
+    # }
 
-
-
-# class MatchingState(TypedDict):
-#     last_user_message: str
-#     project_requirement: Dict[str, Any] | None
-#     employee_list: List[Dict[str, Any]]
-
-#     role_scores: Dict[str, float] | None
-#     skill_scores: Dict[str, float] | None
-#     domain_scores: Dict[str, float] | None
-#     experience_scores: Dict[str, float] | None
-#     availability_scores: Dict[str, float] | None
-
-#     final_scores: List[Dict[str, Any]] | None
+########################################################################3
 
 class ResumeState(TypedDict):
     file_content: bytes | None

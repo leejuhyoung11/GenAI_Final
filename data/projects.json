@@ -1,97 +1,72 @@
 [
-    {
-        "project_id": "P100",
-        "name": "Real-Time Payment Fraud Detection Platform",
-        "domain": "fintech",
-        "description": "A real-time fraud detection system for credit card transactions with sub-second model inference.",
-      
-        "objectives": [
-          "Detect fraudulent transactions under 300ms latency",
-          "Build scalable Kafka → Feature Store → Model Serving pipeline",
-          "Deploy models to AWS EKS with autoscaling"
-        ],
-      
-        "required_roles": [
-          {"role": "backend", "count": 1},
-          {"role": "mlops", "count": 1},
-          {"role": "data", "count": 1}
-        ],
-      
-        "tech_stack": [
-          "kafka", "spark streaming", "python", "fastapi",
-          "aws eks", "docker", "kubernetes"
-        ],
-      
-        "preferred_experience": [
-          "fraud detection",
-          "real-time data pipeline",
-          "credit card transaction systems"
-        ],
-      
-        "duration_months": 6,
-        "priority": "high"
+  {
+    "project_id": "P100",
+    "project_name": "Real-Time Payment Fraud Detection Platform",
+    "description": "A real-time fraud detection system for credit card transactions with sub-second inference.",
+    "domain": "fintech",
+    "duration_months": 6,
+    "roles": [
+      {
+        "role_name": "backend",
+        "headcount": 1,
+        "required_skills": ["python", "fastapi", "kafka", "docker", "aws eks"],
+        "nice_to_have_skills": ["spark streaming", "kubernetes"],
+        "required_domain": ["fintech", "real-time systems"],
+        "preferred_experience": "fraud detection, stream processing",
+        "priority": "high",
+        "notes": "Backend must handle low-latency serving for fraud scoring."
       },
       {
-        "project_id": "P101",
-        "name": "Product Recommendation Personalization Engine",
-        "domain": "e-commerce",
-        "description": "A ranking and recommendation engine using user behavior data collected from web and mobile applications.",
-      
-        "objectives": [
-          "Create personalized product ranking model",
-          "Build feature pipelines for user-event data",
-          "Enable A/B testing framework for ranking strategies"
-        ],
-      
-        "required_roles": [
-          {"role": "backend", "count": 1},
-          {"role": "data", "count": 1},
-          {"role": "mlops", "count": 1}
-        ],
-      
-        "tech_stack": [
-          "python", "tensorflow", "spark", "airflow",
-          "redis", "kubernetes", "aws lambda"
-        ],
-      
-        "preferred_experience": [
-          "recommendation systems",
-          "user behavior analytics",
-          "ETL pipeline building"
-        ],
-      
-        "duration_months": 5,
-        "priority": "medium"
-      },
-      {
-        "project_id": "P106",
-        "name": "Blockchain Transaction Explorer",
-        "domain": "blockchain",
-        "description": "A web-based explorer visualizing blockchain transaction flows and wallet activity.",
-      
-        "objectives": [
-          "Build API service indexing blockchain transactions",
-          "Implement wallet activity visualization",
-          "Ensure fast incremental block parsing"
-        ],
-      
-        "required_roles": [
-          {"role": "backend", "count": 1},
-          {"role": "frontend", "count": 1}
-        ],
-      
-        "tech_stack": [
-          "node.js", "postgresql", "redis", "react",
-          "docker", "websockets"
-        ],
-      
-        "preferred_experience": [
-          "blockchain data structures",
-          "indexing pipelines",
-          "real-time visualization"
-        ],
-      
-        "duration_months": 5,
-        "priority": "medium"
+        "role_name": "mlops",
+        "headcount": 1,
+        "required_skills": ["kafka", "aws eks", "docker", "kubernetes", "spark streaming"],
+        "nice_to_have_skills": ["feature store", "model versioning"],
+        "required_domain": ["ml infra", "real-time inference"],
+        "preferred_experience": "model deployment, autoscaling",
+        "priority": "high",
+        "notes": "Critical path for scalable real-time ML infrastructure."
       }
+    ],
+    "raw_input": "Detect fraudulent transactions under 300ms; Kafka → Feature Store → Model Serving; Deploy on EKS with autoscaling."
+  },
+  {
+    "project_id": "P101",
+    "project_name": "Product Recommendation Personalization Engine",
+    "description": "A personalization and ranking engine using user-event behavioral data.",
+    "domain": "e-commerce",
+    "duration_months": 5,
+    "roles": [
+      {
+        "role_name": "backend",
+        "headcount": 1,
+        "required_skills": ["python", "redis", "fastapi"],
+        "nice_to_have_skills": ["airflow", "aws lambda"],
+        "required_domain": ["e-commerce", "recommendation serving"],
+        "preferred_experience": "API gateway design, caching strategies",
+        "priority": "medium",
+        "notes": "Backend team handles ranking API and feature retrieval."
+      },
+      {
+        "role_name": "data",
+        "headcount": 1,
+        "required_skills": ["spark", "airflow", "python"],
+        "nice_to_have_skills": ["ETL", "kubernetes"],
+        "required_domain": ["analytics", "ETL pipelines"],
+        "preferred_experience": "user behavior analytics, event data processing",
+        "priority": "medium",
+        "notes": "Build event pipelines and feature datasets."
+      },
+      {
+        "role_name": "mlops",
+        "headcount": 1,
+        "required_skills": ["docker", "kubernetes", "aws lambda"],
+        "nice_to_have_skills": ["tensorflow", "model registry"],
+        "required_domain": ["model deployment"],
+        "preferred_experience": "A/B testing infra, ML deployment workflows",
+        "priority": "medium",
+        "notes": "Manage model deployment and experiment framework."
+      }
+    ],
+    "raw_input": "Create personalized ranking model; Build user-event feature pipelines; Enable A/B test framework."
+  }
 ]
