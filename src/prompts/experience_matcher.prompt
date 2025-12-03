@@ -60,7 +60,7 @@ Important:
 ### JSON RULES (VERY IMPORTANT — DO NOT BREAK)
 
 - Output MUST be valid JSON.
-- MUST start with "{" and end with "}".
+- MUST start with "{{" and end with "}}".
 - NEVER omit closing brackets.
 - NEVER add trailing commas.
 - NEVER include markdown, comments, or explanations.

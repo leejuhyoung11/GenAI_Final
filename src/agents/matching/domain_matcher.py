@@ -14,10 +14,8 @@ def domain_matcher(state: MatchingState):
 
     roles = state["project"]["roles"]
     employees = state["employees"]
+    outputs = []
 
-    # Create bucket if does not exist
-    if "role_scores" not in state or state["role_scores"] is None:
-        state["role_scores"] = {}
 
     prompt_template = load_prompt("domain_matcher.prompt")
 
@@ -56,22 +54,16 @@ def domain_matcher(state: MatchingState):
 
         results = parsed.get("results", {})
 
-        # role bucket
-        if role_name not in state["role_scores"]:
-            state["role_scores"][role_name] = {}
 
         # update each employee record
-        for emp_id, item in results.items():
+        for emp_id, r in results.items():
+            outputs.append({
+                "type": "domain",
+                "role": role_name,
+                "employee": emp_id,
+                "score": r.get("score", 0.0),
+                "reason": r.get("reason", "")
+            })
 
-            score = item.get("score", 0.0)
-            reason = item.get("reason", "")
-
-            if emp_id not in state["role_scores"][role_name]:
-                state["role_scores"][role_name][emp_id] = {}
-
-            state["role_scores"][role_name][emp_id]["domain_score"] = score
-            state["role_scores"][role_name][emp_id]["domain_reason"] = reason
-
-    return {
-        "role_scores": state["role_scores"]
-    }
+    return { "role_scores": outputs }
+          

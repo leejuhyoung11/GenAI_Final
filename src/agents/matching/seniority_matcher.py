@@ -5,10 +5,8 @@ def seniority_matcher(state: MatchingState):
 
     roles = state["project"]["roles"]
     employees = state["employees"]
+    list_output = []
 
-    # Initialize role_scores if not exists
-    if "role_scores" not in state or state["role_scores"] is None:
-        state["role_scores"] = {}
 
     def compute_seniority_score(years: int):
         if years is None:
@@ -28,8 +26,6 @@ def seniority_matcher(state: MatchingState):
 
         print(f"\n[SeniorityMatcher] Processing role: {role_name}")
 
-        if role_name not in state["role_scores"]:
-            state["role_scores"][role_name] = {}
 
         for emp in employees:
             emp_id = emp["id"]
@@ -38,12 +34,15 @@ def seniority_matcher(state: MatchingState):
             score = compute_seniority_score(years)
             reason = years if years is not None else 0
 
-            if emp_id not in state["role_scores"][role_name]:
-                state["role_scores"][role_name][emp_id] = {}
+            list_output.append({
+                "type": "seniority",
+                "role": role_name,
+                "employee": emp_id,
+                "score": score,
+                "reason": reason
+            })
 
-            state["role_scores"][role_name][emp_id]["seniority_score"] = score
-            state["role_scores"][role_name][emp_id]["seniority_reason"] = reason
 
     return {
-        "role_scores": state["role_scores"]
+        "role_scores": list_output
     }

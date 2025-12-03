@@ -31,7 +31,7 @@ if __name__ == "__main__":
         "project": projects[0],
         "employees": employees,
         "router_config":{},
-        "role_scores":{},
+        "role_scores":[],
         "final_result": {}
     }
 

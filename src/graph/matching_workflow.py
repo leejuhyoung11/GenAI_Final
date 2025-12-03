@@ -56,8 +56,8 @@ graph.add_edge("seniority_matcher", "note_matcher")
 # -------------------------
 # note -> aggregator -> END
 # -------------------------
-graph.add_edge("note_matcher", "aggregator_agent")
-graph.add_edge("aggregator_agent", END)
+graph.add_edge("note_matcher", END)
+# graph.add_edge("aggregator_agent", END)
 
 
 

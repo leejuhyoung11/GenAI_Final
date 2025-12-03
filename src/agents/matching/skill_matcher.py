@@ -15,9 +15,8 @@ def skill_matcher(state: MatchingState):
     roles = state["project"]["roles"]
     employees = state["employees"]
 
-    # Initialize role_scores if not exists
-    if "role_scores" not in state or state["role_scores"] is None:
-        state["role_scores"] = {}
+    outputs = []
+
 
     # Load prompt template
     prompt_template = load_prompt("skill_matcher.prompt")
@@ -56,47 +55,18 @@ def skill_matcher(state: MatchingState):
         # parsed = { "role_name": "...", "results": {...} }
         results = parsed.get("results", {})
 
-        # Create role bucket if not exists
-        if role_name not in state["role_scores"]:
-            state["role_scores"][role_name] = {}
 
         # Insert skill_score for each employee
-        for emp_id, score_data in results.items():
-
-            score = score_data.get("score", 0.0)
-            reason = score_data.get("reason", "")
-
-            # Create employee entry if needed
-            if emp_id not in state["role_scores"][role_name]:
-                state["role_scores"][role_name][emp_id] = {}
-
-            state["role_scores"][role_name][emp_id]["skill_score"] = score
-            state["role_scores"][role_name][emp_id]["skill_reason"] = reason
-
-    return {
-        "role_scores": state["role_scores"]
-    }
+        for emp_id, r in results.items():
+            outputs.append({
+                "type": "skill",
+                "role": role_name,
+                "employee": emp_id,
+                "score": r.get("score", 0.0),
+                "reason": r.get("reason", "")
+            })
 
 
+    return { "role_scores": outputs }
 
 
-    return
-    
-    prompt = load_prompt("skill_matcher.prompt").format(
-        project_roles=state["project"]["roles"],
-        employees_json=state["employees"]
-    )
-
-    raw_response = skill_llm.call(prompt)
-
-    print(raw_response)
-    print("#####################")
-    
-    try:
-        skill_results = json.loads(raw_response)
-    except Exception as e:
-        print("[ERROR] RouterAgent JSON Parse Failed:", e)
-
-
-    
-    return skill_results
