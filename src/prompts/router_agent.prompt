@@ -12,14 +12,12 @@ Your ONLY task is to convert the user's request into structured JSON with the fo
     "domain_matcher": true or false,
     "experience_matcher": true or false,
     "seniority_matcher": true or false,
-    "availability_matcher": true or false
   }},
   "weights": {{
     "skill_matcher": float (0.0~1.0),
     "domain_matcher": float (0.0~1.0),
     "experience_matcher": float (0.0~1.0),
     "seniority_matcher": float (0.0~1.0),
-    "availability_matcher": float (0.0~1.0)
   }},
   "rules": {{
     "exclude": [list of employee names],
@@ -37,9 +35,8 @@ INSTRUCTIONS:
 2. Weight defaults:
      skill_matcher: 0.30
      experience_matcher: 0.25
-     domain_matcher: 0.15
+     domain_matcher: 0.25
      seniority_matcher: 0.20
-     availability_matcher: 0.10
    The weights MUST always sum to 1.0.  
    You may adjust these if the user indicates certain dimensions are more or less important.
 
@@ -64,7 +61,7 @@ INSTRUCTIONS:
 SPECIAL NOTE EXTRACTION:
 
 - Extract any meaningful preference or contextual hint that is NOT directly matched by
-  skills, domain, experience, availability, or seniority.
+  skills, domain, experience, or seniority.
 - Summaries must be short, clear sentences (under 25 words).
 - Do NOT copy user text verbatim; summarize intent.
 - Do NOT include trivial or redundant information.

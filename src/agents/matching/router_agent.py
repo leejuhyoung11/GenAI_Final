@@ -11,6 +11,19 @@ router_model_cfg = config["models"]["router"]
 router_llm = LLMProviderFactory.load_from_config(router_model_cfg)
 
 
+def router_validator(state):
+    cfg = state["router_config"]
+
+    # All mathcers False
+    if not any(cfg["active_matchers"].values()):
+        return {"router_valid": False}
+
+    # Weight sum is not 1
+    if abs(sum(cfg["matcher_weights"].values()) - 1.0) > 1e-6:
+        return {"router_valid": False}
+
+    return {"router_valid": True}
+
 
 
 def router_agent(state: MatchingState):
@@ -33,14 +46,12 @@ def router_agent(state: MatchingState):
                 "domain_matcher": True,
                 "experience_matcher": True,
                 "seniority_matcher": True,
-                "availability_matcher": True,
             },
             "weights": {
                 "skill_matcher": 0.3,
-                "domain_matcher": 0.15,
+                "domain_matcher": 0.25,
                 "experience_matcher": 0.25,
                 "seniority_matcher": 0.2,
-                "availability_matcher": 0.1,
             },
             "rules": {
                 "exclude": [],

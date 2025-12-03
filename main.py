@@ -5,6 +5,9 @@ from src.graph.matching_workflow import workflow
 
 from src.agents.matching.router_agent import router_agent
 from src.agents.matching.skill_matcher import skill_matcher
+from src.agents.matching.domain_matcher import domain_matcher
+from src.agents.matching.seniority_matcher import seniority_matcher
+from src.agents.matching.note_matcher import note_matcher
 
 if __name__ == "__main__":
 
@@ -27,13 +30,25 @@ if __name__ == "__main__":
         """,
         "project": projects[0],
         "employees": employees,
-        "router_config": {},
+        "router_config": {"rules": {
+        "exclude": ["Alice", "Bob"],
+        "include": [],
+        "min_experience_years": None,
+        "special_note": [
+            "User explicitly said to only check skills.",
+            "User needs strong Python, AWS, FastAPI",
+            "ML model serving is mentioned, but user restricted the matching to skills only"
+        ]
+    }},
         "role_scores":{},
         "final_result": {}
     }
 
-    print(skill_matcher(state))
+    print(note_matcher(state))
 
     # result = workflow.invoke(state)
 
     # print(result)
+
+
+    # TODO 저장함수만들기 

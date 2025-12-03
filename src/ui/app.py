@@ -143,7 +143,8 @@ elif menu == "🤖 Analyze Project":
                 "requirement_text": "",
                 "project": selected,
                 "employees": employees,
-                "partial_scores": {},
+                "router_config": {},
+                "role_scores": {},
                 "final_result": {}
             }
 
