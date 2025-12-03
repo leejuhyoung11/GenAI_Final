@@ -4,5 +4,5 @@ def experience_matcher(state):
 
     dummy = {emp["name"]: 0.0 for emp in employees}
 
-    state["scores"]["experience"] = dummy
+    state["role_scores"]["experience"] = dummy
     return state

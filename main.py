@@ -30,25 +30,14 @@ if __name__ == "__main__":
         """,
         "project": projects[0],
         "employees": employees,
-        "router_config": {"rules": {
-        "exclude": ["Alice", "Bob"],
-        "include": [],
-        "min_experience_years": None,
-        "special_note": [
-            "User explicitly said to only check skills.",
-            "User needs strong Python, AWS, FastAPI",
-            "ML model serving is mentioned, but user restricted the matching to skills only"
-        ]
-    }},
+        "router_config":{},
         "role_scores":{},
         "final_result": {}
     }
 
-    print(note_matcher(state))
-
-    # result = workflow.invoke(state)
+    # workflow.get_graph().draw_png("graph.png")
+    
+    result = workflow.invoke(state, dubug=True)
 
     # print(result)
 
-
-    # TODO 저장함수만들기 

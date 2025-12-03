@@ -1,4 +1,6 @@
 from typing import TypedDict, List, Dict, Any, Optional, Literal
+from typing_extensions import Annotated
+from langgraph.channels import ListAppend
 
 class RoleRequirement(TypedDict, total=False):
     role_name: str                    
@@ -24,7 +26,7 @@ class MatchingState(TypedDict):
     project: ProjectRequirement
     employees: List[Dict]
     router_config: Dict[str, Any]
-    role_scores: Dict[str, Dict[str, Dict[str, float]]]
+    role_scores: Annotated[List[dict], ListAppend]
     final_result: Dict[str, Any]
 
 # role_scores_structure
