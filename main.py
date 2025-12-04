@@ -8,6 +8,7 @@ from src.agents.matching.skill_matcher import skill_matcher
 from src.agents.matching.domain_matcher import domain_matcher
 from src.agents.matching.seniority_matcher import seniority_matcher
 from src.agents.matching.note_matcher import note_matcher
+from src.agents.matching.experience_matcher import experience_matcher
 
 if __name__ == "__main__":
 
@@ -24,9 +25,7 @@ if __name__ == "__main__":
     state = {
         "requirement_text":"""
         We need 2 backend engineers with strong Python, AWS, and FastAPI.
-        ML model serving experience is very important.
         Please exclude Alice and Bob.
-        Only check skill not the other one.
         """,
         "project": projects[0],
         "employees": employees,
@@ -38,6 +37,9 @@ if __name__ == "__main__":
     # workflow.get_graph().draw_png("graph.png")
     
     result = workflow.invoke(state, dubug=True)
+
+    # experience_matcher(state)
+
 
     # print(result)
 

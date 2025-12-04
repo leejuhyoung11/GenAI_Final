@@ -32,7 +32,7 @@ SCORING RULES:
 
 CRITICAL JSON RULES (DO NOT BREAK):
 - Output MUST be valid JSON.
-- MUST start with "{" and MUST end with "}".
+- MUST start with "{{" and MUST end with "}}".
 - NO missing brackets.
 - NO trailing commas.
 - NO extra text, comments, or explanation outside the JSON.
