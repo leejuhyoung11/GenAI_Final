@@ -1,0 +1,402 @@
+{
+  "project_id": "P100",
+  "project_name": "Real-Time Payment Fraud Detection Platform",
+  "roles": [
+    {
+      "role_name": "backend",
+      "headcount": 1,
+      "candidates": [
+        {
+          "employee_id": "E001",
+          "name": "Alice Kim",
+          "experience_years": 6,
+          "base_score": 83.5,
+          "final_score": 100.0,
+          "forced_included": true,
+          "note_score": 1.0,
+          "per_matcher": {
+            "domain": {
+              "score": 0.8,
+              "reason": "Alice Kim has strong experience in backend engineering, including building high-volume APIs, optimizing database performance, and working with cloud infrastructure. Her experience in fintech, real-time systems, and fraud detection is a good match for the required domain."
+            },
+            "experience": {
+              "score": 0.9,
+              "reason": "Alice Kim has direct experience in building backend systems for fraud detection and real-time data processing. She has worked on projects involving high-volume APIs, caching, and microservices architecture, which are relevant to the requirements of this backend role. Her experience with technologies like Python, FastAPI, Kafka, Docker, and AWS EKS aligns well with the required skills."
+            },
+            "seniority": {
+              "score": 0.7,
+              "reason": 6
+            },
+            "skill": {
+              "score": 0.9,
+              "reason": "Extensive experience in building backend systems, including Kafka, Docker, and AWS EKS."
+            },
+            "note": {
+              "score": 1.0,
+              "reason": "Include list overrides all."
+            }
+          }
+        },
+        {
+          "employee_id": "E004",
+          "name": "Chris Yu",
+          "experience_years": 7,
+          "base_score": 89.0,
+          "final_score": 100.0,
+          "forced_included": true,
+          "note_score": 1.0,
+          "per_matcher": {
+            "domain": {
+              "score": 0.9,
+              "reason": "Chris Yu has extensive experience in backend engineering, particularly in fintech and payment processing domains, which aligns well with the required domain."
+            },
+            "experience": {
+              "score": 0.9,
+              "reason": "Chris Yu has extensive experience in backend development for fintech and payment processing systems, which aligns well with the domain requirements of this role. He has worked on high-concurrency payment workflows, fraud detection, and batch processing, and is proficient in technologies like Java, SpringBoot, Kafka, and MySQL, which are relevant to the role."
+            },
+            "seniority": {
+              "score": 0.85,
+              "reason": 7
+            },
+            "skill": {
+              "score": 0.9,
+              "reason": "Experienced in building backend systems, including Kafka, MySQL, and gRPC."
+            },
+            "note": {
+              "score": 1.0,
+              "reason": "Include list overrides all."
+            }
+          }
+        },
+        {
+          "employee_id": "E003",
+          "name": "Hannah Lee",
+          "experience_years": 5,
+          "base_score": 67.5,
+          "final_score": 67.5,
+          "forced_included": false,
+          "note_score": 0.0,
+          "per_matcher": {
+            "domain": {
+              "score": 0.6,
+              "reason": "Hannah Lee has relevant experience in MLOps and building cloud infrastructure, which is somewhat related to the backend role. However, she does not have direct experience in fintech or real-time systems."
+            },
+            "experience": {
+              "score": 0.7,
+              "reason": "Hannah Lee has relevant experience as an MLOps Engineer, which includes building scalable feature pipelines, managing model deployments, and implementing monitoring for production systems. Her expertise in technologies like Kubernetes, AWS, Terraform, and Spark Streaming is a good fit for the backend role. However, her experience is more focused on the ML infrastructure side rather than the core backend development tasks."
+            },
+            "seniority": {
+              "score": 0.7,
+              "reason": 5
+            },
+            "skill": {
+              "score": 0.7,
+              "reason": "Strong DevOps and MLOps background, but lacks direct backend development experience."
+            },
+            "note": {
+              "score": 0.0,
+              "reason": "No clear preference detected."
+            }
+          }
+        },
+        {
+          "employee_id": "E002",
+          "name": "David Park",
+          "experience_years": 4,
+          "base_score": 30.0,
+          "final_score": 0.0,
+          "forced_included": false,
+          "note_score": -1.0,
+          "per_matcher": {
+            "domain": {
+              "score": 0.2,
+              "reason": "David Park is a frontend developer and does not have direct experience in the required backend and fintech/real-time systems domain."
+            },
+            "experience": {
+              "score": 0.2,
+              "reason": "David Park's experience is focused on frontend development and does not directly match the backend requirements of this role. While he has some relevant skills like TypeScript and React, his background is primarily in customer-facing web applications and does not include the necessary experience in areas like real-time systems, fraud detection, or backend architecture."
+            },
+            "seniority": {
+              "score": 0.7,
+              "reason": 4
+            },
+            "skill": {
+              "score": 0.2,
+              "reason": "Primarily a frontend developer with no relevant backend experience."
+            },
+            "note": {
+              "score": -1.0,
+              "reason": "Employee does not have the required role."
+            }
+          }
+        },
+        {
+          "employee_id": "E005",
+          "name": "Emily Choi",
+          "experience_years": 5,
+          "base_score": 43.5,
+          "final_score": 0.0,
+          "forced_included": false,
+          "note_score": -1.0,
+          "per_matcher": {
+            "domain": {
+              "score": 0.3,
+              "reason": "Emily Choi is a data engineer and does not have direct experience in backend engineering or the fintech/real-time systems domain."
+            },
+            "experience": {
+              "score": 0.4,
+              "reason": "Emily Choi's background is in data engineering and ETL pipelines, which is somewhat related to the backend role but does not directly match the key requirements. While she has experience with technologies like Spark, Airflow, and AWS data services, her focus has been more on building data processing infrastructure rather than core backend development."
+            },
+            "seniority": {
+              "score": 0.7,
+              "reason": 5
+            },
+            "skill": {
+              "score": 0.4,
+              "reason": "Data engineering background, but lacks direct backend development experience."
+            },
+            "note": {
+              "score": -1.0,
+              "reason": "Employee does not have the required role."
+            }
+          }
+        },
+        {
+          "employee_id": "E006",
+          "name": "Ryan Ko",
+          "experience_years": 3,
+          "base_score": 24.0,
+          "final_score": 0.0,
+          "forced_included": false,
+          "note_score": -1.0,
+          "per_matcher": {
+            "domain": {
+              "score": 0.2,
+              "reason": "Ryan Ko is a frontend developer and does not have relevant experience for the backend role."
+            },
+            "experience": {
+              "score": 0.2,
+              "reason": "Ryan Ko's experience is primarily in frontend development, with a focus on building marketing landing pages and UI component libraries. His skills in React, TypeScript, and Tailwind CSS are not directly relevant to the backend role and its requirements around real-time systems, fraud detection, and cloud infrastructure."
+            },
+            "seniority": {
+              "score": 0.4,
+              "reason": 3
+            },
+            "skill": {
+              "score": 0.2,
+              "reason": "Frontend developer with no relevant backend experience."
+            },
+            "note": {
+              "score": -1.0,
+              "reason": "Employee does not have the required role."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "role_name": "mlops",
+      "headcount": 1,
+      "candidates": [
+        {
+          "employee_id": "E003",
+          "name": "Hannah Lee",
+          "experience_years": 5,
+          "base_score": 86.0,
+          "final_score": 100.0,
+          "forced_included": true,
+          "note_score": 1.0,
+          "per_matcher": {
+            "domain": {
+              "score": 0.9,
+              "reason": "Employee has strong experience in the required domain of 'mlops', including building feature pipelines, managing model deployment, and implementing monitoring for real-time ML systems. The employee's background aligns well with the preferred experience of 'model deployment, autoscaling'."
+            },
+            "experience": {
+              "score": 0.9,
+              "reason": "Hannah has extensive experience as an MLOps engineer, including building feature pipelines, managing model deployments, and implementing monitoring and observability. Her background in infrastructure automation and cloud provisioning is also highly relevant for this role."
+            },
+            "seniority": {
+              "score": 0.7,
+              "reason": 5
+            },
+            "skill": {
+              "score": 0.9,
+              "reason": "Strong background in MLOps, including Kafka, EKS, Docker, and Terraform experience."
+            },
+            "note": {
+              "score": 1.0,
+              "reason": "Meets all requirements"
+            }
+          }
+        },
+        {
+          "employee_id": "E001",
+          "name": "Alice Kim",
+          "experience_years": 6,
+          "base_score": 67.0,
+          "final_score": 67.0,
+          "forced_included": false,
+          "note_score": 0.0,
+          "per_matcher": {
+            "domain": {
+              "score": 0.7,
+              "reason": "Employee has experience with ML model serving and cloud infrastructure, which is semantically related to the required domain of 'ml infra' and 'real-time inference'. However, the employee's experience is not directly focused on the preferred experience of 'model deployment, autoscaling'."
+            },
+            "experience": {
+              "score": 0.7,
+              "reason": "Alice has relevant experience in building ML model serving platforms, including integrating with cloud infrastructure and implementing autoscaling. However, her experience is more focused on the backend engineering aspects rather than the full MLOps lifecycle, such as feature engineering, model training, and deployment workflows."
+            },
+            "seniority": {
+              "score": 0.7,
+              "reason": 6
+            },
+            "skill": {
+              "score": 0.6,
+              "reason": "Relevant experience in ML model serving and cloud infrastructure, but lacks specific Kafka, EKS, and Spark Streaming skills."
+            },
+            "note": {
+              "score": 0.0,
+              "reason": "No clear preference detected"
+            }
+          }
+        },
+        {
+          "employee_id": "E002",
+          "name": "David Park",
+          "experience_years": 4,
+          "base_score": 32.5,
+          "final_score": 0.0,
+          "forced_included": false,
+          "note_score": -1.0,
+          "per_matcher": {
+            "domain": {
+              "score": 0.3,
+              "reason": "Employee has no direct experience in the required domain of 'ml infra' and 'real-time inference'. The employee's background is in frontend development and enterprise admin tools, which is not relevant to the MLOps role."
+            },
+            "experience": {
+              "score": 0.2,
+              "reason": "David's background is primarily in frontend development and does not align with the MLOps role requirements. He lacks experience in areas like cloud infrastructure, container orchestration, and real-time data processing."
+            },
+            "seniority": {
+              "score": 0.7,
+              "reason": 4
+            },
+            "skill": {
+              "score": 0.2,
+              "reason": "No relevant experience in MLOps or the required skills for this role."
+            },
+            "note": {
+              "score": -1.0,
+              "reason": "Does not meet minimum experience requirement"
+            }
+          }
+        },
+        {
+          "employee_id": "E004",
+          "name": "Chris Yu",
+          "experience_years": 7,
+          "base_score": 49.0,
+          "final_score": 0.0,
+          "forced_included": false,
+          "note_score": -1.0,
+          "per_matcher": {
+            "domain": {
+              "score": 0.4,
+              "reason": "Employee has experience in fintech and backend development, which is somewhat related to the required domain, but not directly focused on MLOps or real-time inference. The employee's background is more aligned with backend engineering than the specific MLOps role."
+            },
+            "experience": {
+              "score": 0.4,
+              "reason": "Chris has strong backend engineering skills, particularly in areas like stream processing and microservices. However, his experience is more focused on fintech and payment systems, which only partially overlaps with the MLOps domain."
+            },
+            "seniority": {
+              "score": 0.85,
+              "reason": 7
+            },
+            "skill": {
+              "score": 0.4,
+              "reason": "Relevant experience in Kafka and cloud infrastructure, but lacks specific MLOps and Kubernetes skills."
+            },
+            "note": {
+              "score": -1.0,
+              "reason": "Not a good fit for the role"
+            }
+          }
+        },
+        {
+          "employee_id": "E005",
+          "name": "Emily Choi",
+          "experience_years": 5,
+          "base_score": 56.5,
+          "final_score": 0.0,
+          "forced_included": false,
+          "note_score": -1.0,
+          "per_matcher": {
+            "domain": {
+              "score": 0.5,
+              "reason": "Employee has experience in data engineering and ETL pipelines, which is somewhat related to the required domain, but not directly focused on MLOps or real-time inference. The employee's background is more aligned with data engineering than the specific MLOps role."
+            },
+            "experience": {
+              "score": 0.6,
+              "reason": "Emily has relevant data engineering experience, including building ETL pipelines and data lakes. While she doesn't have direct MLOps experience, her background in modern data engineering practices would be beneficial for this role."
+            },
+            "seniority": {
+              "score": 0.7,
+              "reason": 5
+            },
+            "skill": {
+              "score": 0.5,
+              "reason": "Experience in data engineering and cloud infrastructure, but lacks specific MLOps and real-time inference skills."
+            },
+            "note": {
+              "score": -1.0,
+              "reason": "Not a good fit for the role"
+            }
+          }
+        },
+        {
+          "employee_id": "E006",
+          "name": "Ryan Ko",
+          "experience_years": 3,
+          "base_score": 21.0,
+          "final_score": 0.0,
+          "forced_included": false,
+          "note_score": -1.0,
+          "per_matcher": {
+            "domain": {
+              "score": 0.2,
+              "reason": "Employee has no experience in the required domain of 'ml infra' and 'real-time inference'. The employee's background is in frontend development and design systems, which is not relevant to the MLOps role."
+            },
+            "experience": {
+              "score": 0.2,
+              "reason": "Ryan's frontend development experience is not directly relevant to the MLOps role. He lacks the necessary background in cloud infrastructure, data processing, and model deployment workflows."
+            },
+            "seniority": {
+              "score": 0.4,
+              "reason": 3
+            },
+            "skill": {
+              "score": 0.1,
+              "reason": "No relevant experience in MLOps or the required skills for this role."
+            },
+            "note": {
+              "score": -1.0,
+              "reason": "Does not meet minimum experience requirement"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "weights": {
+    "skill_matcher": 0.3,
+    "domain_matcher": 0.25,
+    "experience_matcher": 0.25,
+    "seniority_matcher": 0.2
+  },
+  "rules": {
+    "exclude": [],
+    "include": [],
+    "min_experience_years": null,
+    "special_note": []
+  }
+}

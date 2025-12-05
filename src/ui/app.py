@@ -1,13 +1,16 @@
-from src.graph.matching_workflow import workflow
-import streamlit as st
-import json
 import os, sys
-
-st.set_page_config(layout="wide")
 
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 if ROOT_DIR not in sys.path:
     sys.path.insert(0, ROOT_DIR)
+
+from src.graph.matching_workflow import workflow
+import streamlit as st
+import json
+
+
+st.set_page_config(layout="wide")
+
 
 # ================== SIDEBAR STYLE =====================
 st.markdown("""
@@ -127,27 +130,99 @@ elif menu == "🤖 Analyze Project":
     else:
         with open(PROJ_PATH, "r", encoding="utf-8") as f:
             projects = json.load(f)
-        selected = st.selectbox("Select project", [p["name"] for p in projects])
+        selected = st.selectbox("Select project", [p["project_name"] for p in projects])
+        requirement_text = st.text_area("Describe what kind of team you want:")
+        
         if st.button("Start Analysis"):
-            st.write("Start")
-            
             # Load employee data
             EMP_PATH = os.path.join("data", "employees.json")
             with open(EMP_PATH, "r", encoding="utf-8") as f:
                 employees = json.load(f)
 
-            requirement_text = st.text_area("Describe what kind of team you want:")
-            
+            selected_project = next(
+                p for p in projects if p["project_name"] == selected
+            )
+
             # Initialize State
             state = {
-                "requirement_text": "",
-                "project": selected,
+                "requirement_text": requirement_text,
+                "project": selected_project,
                 "employees": employees,
                 "router_config": {},
-                "role_scores": {},
+                "role_scores": [],
                 "final_result": {}
             }
 
-            result = workflow.invoke(state)
+            OUTPUT_PATH = f"output/{selected_project['project_id']}.json"
 
-            st.json(result)
+            if os.path.exists(OUTPUT_PATH):
+                os.remove(OUTPUT_PATH)
+
+            # ------------------------------
+            # RUN WORKFLOW WITH LOADING SPINNER
+            # ------------------------------
+            with st.spinner("Analyzing..."):
+                result = workflow.invoke(state)
+
+                # Wait for output file
+                import time
+                timeout = 30
+                waited = 0
+                while not os.path.exists(OUTPUT_PATH) and waited < timeout:
+                    time.sleep(0.3)
+                    waited += 0.3
+
+                if not os.path.exists(OUTPUT_PATH):
+                    st.error("Analysis failed: output file not created.")
+                    st.stop()
+
+            with open(OUTPUT_PATH, "r", encoding="utf-8") as f:
+                st.session_state["analysis_result"] = json.load(f)
+
+            st.success("Analysis complete!")
+
+        # ----------------------
+        # SHOW UI AFTER ANALYSIS
+        # ----------------------
+        if "analysis_result" in st.session_state:
+            result = st.session_state["analysis_result"]
+
+            st.header("Role-based Result Viewer")
+
+            roles = [r["role_name"] for r in result["roles"]]
+            selected_role = st.selectbox("Select Role", roles)
+
+            role_data = next(r for r in result["roles"] if r["role_name"] == selected_role)
+            candidates = role_data["candidates"]
+
+            st.subheader(f"Candidates for {selected_role}")
+
+            table_rows = [
+                {
+                    "Employee": c["name"],
+                    "Experience": c["experience_years"],
+                    "Base Score": c["base_score"],
+                    "Final Score": c["final_score"],
+                    "Note Score": c["note_score"],
+                    "Included?": c["forced_included"]
+                }
+                for c in candidates
+            ]
+
+            st.dataframe(table_rows, use_container_width=True)
+
+            # Candidate Detail
+            st.subheader("Candidate Details")
+            selected_employee = st.selectbox("Select Employee", [c["name"] for c in candidates])
+            person = next(c for c in candidates if c["name"] == selected_employee)
+
+            st.markdown(f"### 📌 {selected_employee}")
+            st.write(f"**Experience:** {person['experience_years']} years")
+            st.write(f"**Final Score:** {person['final_score']}")
+            st.write(f"**Note Score:** {person['note_score']}")
+
+            st.subheader("Matcher Breakdown")
+            for k, v in person["per_matcher"].items():
+                with st.expander(f"🔹 {k}"):
+                    st.write("Score:", v["score"])
+                    st.write("Reason:", v["reason"])
