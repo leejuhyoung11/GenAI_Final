@@ -23,7 +23,7 @@ st.markdown("""
             background-color: #f5f7fa;
         }
 
-        /* 사이드바 제목 */
+        /* side bar title */
         .sidebar-title {
             font-size: 24px;
             font-weight: 700;
@@ -31,14 +31,14 @@ st.markdown("""
             color: #0f172a;
         }
 
-        /* 라디오 그룹을 세로로 꽉 차게 */
+        /*radio group */
         [data-testid="stSidebar"] div[role="radiogroup"] {
             display: flex;
             flex-direction: column;
             gap: 0px;
         }
 
-        /* 각 항목(label)을 버튼처럼 보이게 */
+        /*label finisgh */
         [data-testid="stSidebar"] div[role="radiogroup"] > label {
             width: 100%;
             padding: 12px 16px;
@@ -51,17 +51,17 @@ st.markdown("""
             cursor: pointer;
         }
 
-        /* hover 효과 */
+        /* hover  */
         [data-testid="stSidebar"] div[role="radiogroup"] > label:hover {
             background-color: #cbd5e1;
         }
 
-        /* 동그란 라디오 아이콘 숨기기 */
+        /* hide radio */
         [data-testid="stSidebar"] div[role="radiogroup"] > label > div:first-child {
             display: none;
         }
 
-        /* 선택된 메뉴 강조 (Streamlit 버전에 따라 data-selected, aria-checked 등 달라질 수 있음) */
+        /* Highlight */
         [data-testid="stSidebar"] div[role="radiogroup"] > label[aria-checked="true"] {
             background-color: #1e40af !important;
             color: white !important;
@@ -81,7 +81,7 @@ menu_items = [
 with st.sidebar:
     st.markdown('<div class="sidebar-title">TalentMatch AI</div>', unsafe_allow_html=True)
 
-    # 첫 실행 시 기본 메뉴 설정
+    # Menue
     if "menu" not in st.session_state:
         st.session_state.menu = menu_items[0]
 
@@ -90,14 +90,14 @@ with st.sidebar:
         "Menu",
         options=menu_items,
         label_visibility="collapsed",
-        key="menu",   # st.session_state["menu"]에 저장됨
+        key="menu",   # st.session_state["menu"]
     )
 
 # ================== MAIN AREA =========================
 
 st.title("TalentMatch AI Dashboard")
 
-# 여기서 menu 값은 st.session_state.menu 와 동일
+#  menu st.session_state.menu 
 if menu == "🏷 Add Resume":
     st.subheader("Upload Resume(s) (PDF)")
 
@@ -170,7 +170,7 @@ elif menu == "📦 Project List":
         project_obj = next(p for p in projects if p["project_name"] == selected_project_name)
         project_id = project_obj["project_id"]
 
-        # --- 분석 결과 있는 경우 ---
+        # --- Exist>? ---
         if (
             "analysis_result" in st.session_state
             and project_id in st.session_state["analysis_result"]
@@ -200,7 +200,7 @@ elif menu == "📦 Project List":
 
             st.dataframe(table_rows, use_container_width=True)
 
-            # 상세 정보
+            # Details
             st.subheader("Candidate Details")
             selected_employee = st.selectbox("Select Employee", [c["name"] for c in candidates])
             person = next(c for c in candidates if c["name"] == selected_employee)
