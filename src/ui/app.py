@@ -4,7 +4,10 @@ ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 if ROOT_DIR not in sys.path:
     sys.path.insert(0, ROOT_DIR)
 
+DATA_DIR = os.path.join(ROOT_DIR, "data")
+
 from src.graph.matching_workflow import workflow
+from src.graph.resume_workflow import run_resume_ingestion
 import streamlit as st
 import json
 
@@ -82,7 +85,7 @@ with st.sidebar:
     if "menu" not in st.session_state:
         st.session_state.menu = menu_items[0]
 
-    # radio 자체에 key를 두고 state는 Streamlit에게 맡김
+    # radio 
     menu = st.radio(
         "Menu",
         options=menu_items,
@@ -96,21 +99,61 @@ st.title("TalentMatch AI Dashboard")
 
 # 여기서 menu 값은 st.session_state.menu 와 동일
 if menu == "🏷 Add Resume":
-    st.subheader("Upload Resume (PDF)")
-    uploaded = st.file_uploader("Upload PDF resume", type=["pdf"])
-    if uploaded:
-        st.success("Resume uploaded!")
-        # TODO: resume 처리 워크플로우 연결
+    st.subheader("Upload Resume(s) (PDF)")
+
+    uploaded_files = st.file_uploader(
+        "Upload up to 3 PDF resumes",
+        type=["pdf"],
+        accept_multiple_files=True,
+        key="add_resume_uploader",   # unique key
+    )
+
+    if uploaded_files:
+        st.info(f"{len(uploaded_files)} file(s) selected. Only the first 3 will be processed.")
+
+        if st.button("Process Resumes", key="process_resume_btn"):
+            results = []
+
+            with st.spinner("Processing resumes with agents (extraction + validation + save)..."):
+                # Hard cap at 3 resumes per run
+                for f in uploaded_files[:3]:
+                    file_bytes = f.getvalue()
+                    final_state = run_resume_ingestion(file_bytes)
+                    results.append((f.name, final_state))
+
+            st.success(f"✅ Processed {len(results)} resume(s) and appended to `data/employees.json`")
+
+            for filename, state in results:
+                st.markdown(f"**{filename}** → Parsed profile:")
+                st.json(state.get("parsed_employee_json"))
 
 elif menu == "📁 Employee List":
     st.subheader("Employee List")
-    EMP_PATH = os.path.join(ROOT_DIR, "src", "data", "employees.json")
-    if os.path.exists(EMP_PATH):
-        with open(EMP_PATH, "r", encoding="utf-8") as f:
+
+    emp_path = os.path.join(DATA_DIR, "employees.json")
+    if os.path.exists(emp_path):
+        with open(emp_path, "r", encoding="utf-8") as f:
             employees = json.load(f)
-        st.table([e["name"] for e in employees])
+
+        if not employees:
+            st.info("Employee store is empty. Try adding a resume first.")
+        else:
+            rows = []
+            for e in employees:
+                rows.append(
+                    {
+                        "ID": e.get("id"),
+                        "Name": e.get("name"),
+                        "Role": e.get("role"),
+                        "Seniority": e.get("seniority"),
+                        "Availability": e.get("availability"),
+                        "Source": e.get("source", "internal"),
+                    }
+                )
+            st.dataframe(rows, use_container_width=True)
     else:
-        st.info("No employees found.")
+        st.info("No employees found. `data/employees.json` does not exist yet.")
+
 
 elif menu == "📦 Project List":
 
@@ -121,48 +164,36 @@ elif menu == "📦 Project List":
         with open(PROJ_PATH, "r", encoding="utf-8") as f:
             projects = json.load(f)
 
-        # 프로젝트 이름 리스트
         project_names = [p["project_name"] for p in projects]
-
-        # 프로젝트 선택 UI
         selected_project_name = st.selectbox("Select project", project_names)
 
-        # 전체 프로젝트 dict 가져오기
         project_obj = next(p for p in projects if p["project_name"] == selected_project_name)
         project_id = project_obj["project_id"]
 
-    
-
-        # -----------------------------------------
+        # --- 분석 결과 있는 경우 ---
         if (
             "analysis_result" in st.session_state
             and project_id in st.session_state["analysis_result"]
         ):
             st.success("Analysis Result Found!")
-
             result = st.session_state["analysis_result"][project_id]
 
-            # -----------------------------------------
-            # ROLE VIEWER
-            # -----------------------------------------
             st.header("Role-based Result Viewer")
-
             roles = [r["role_name"] for r in result["roles"]]
             selected_role = st.selectbox("Select Role", roles)
 
             role_data = next(r for r in result["roles"] if r["role_name"] == selected_role)
             candidates = role_data["candidates"]
 
-            # 표 영역
             st.subheader(f"Candidates for {selected_role}")
 
             table_rows = [
                 {
                     "Employee": c["name"],
                     "Final Score": c["final_score"],
-                    "Domain Score": c["per_matcher"]["domain"]["score"],
-                    "Skill Score": c["per_matcher"]["skill"]["score"],
-                    "Experience": c["experience_years"],
+                    "Domain Score": c.get("per_matcher", {}).get("domain", {}).get("score", 0),
+                    "Skill Score": c.get("per_matcher", {}).get("skill", {}).get("score", 0),
+                    "Experience Year": c["experience_years"],
                 }
                 for c in candidates
             ]
@@ -171,22 +202,16 @@ elif menu == "📦 Project List":
 
             # 상세 정보
             st.subheader("Candidate Details")
-            selected_employee = st.selectbox(
-                "Select Employee",
-                [c["name"] for c in candidates]
-            )
+            selected_employee = st.selectbox("Select Employee", [c["name"] for c in candidates])
             person = next(c for c in candidates if c["name"] == selected_employee)
 
             st.markdown(f"### 📌 {selected_employee}")
-            st.write(f"**Experience:** {person['experience_years']} years")
-            st.write(f"**Final Score:** {person['final_score']}")
-            st.write(f"**Note Score:** {person['note_score']}")
 
             st.subheader("Matcher Breakdown")
             for matcher_name, matcher_info in person["per_matcher"].items():
                 with st.expander(f"🔹 {matcher_name}"):
-                    st.write("Score:", matcher_info["score"])
-                    st.write("Reason:", matcher_info["reason"])
+                    st.write("Score:", matcher_info.get("score", 0))
+                    st.write("Reason:", matcher_info.get("reason", ""))
 
         else:
             st.info("No analysis result stored for this project yet.")
@@ -194,28 +219,34 @@ elif menu == "📦 Project List":
     else:
         st.info("No projects yet.")
 
+
 elif menu == "🤖 Analyze Project":
+
     st.subheader("Analyze Project")
-    PROJ_PATH = os.path.join("data", "projects.json") 
+
+    PROJ_PATH = os.path.join("data", "projects.json")
     if not os.path.exists(PROJ_PATH):
         st.warning("No project file.")
     else:
         with open(PROJ_PATH, "r", encoding="utf-8") as f:
             projects = json.load(f)
-        selected = st.selectbox("Select project", [p["project_name"] for p in projects])
+
+        selected_name = st.selectbox("Select project", [p["project_name"] for p in projects])
         requirement_text = st.text_area("Describe what kind of team you want:")
-        
+
         if st.button("Start Analysis"):
-            # Load employee data
+
+            # employee load
             EMP_PATH = os.path.join("data", "employees.json")
             with open(EMP_PATH, "r", encoding="utf-8") as f:
                 employees = json.load(f)
 
-            selected_project = next(
-                p for p in projects if p["project_name"] == selected
-            )
+            selected_project = next(p for p in projects if p["project_name"] == selected_name)
 
-            # Initialize State
+            # store project in session
+            st.session_state["selected_project"] = selected_project
+
+            # INITIAL STATE
             state = {
                 "requirement_text": requirement_text,
                 "project": selected_project,
@@ -230,76 +261,50 @@ elif menu == "🤖 Analyze Project":
             if os.path.exists(OUTPUT_PATH):
                 os.remove(OUTPUT_PATH)
 
-            # ------------------------------
-            # RUN WORKFLOW WITH LOADING SPINNER
-            # ------------------------------
+            # RUN WORKFLOW
             with st.spinner("Analyzing..."):
-                result = workflow.invoke(state)
+                workflow.invoke(state)
 
-                # Wait for output file
+                # wait for file
                 import time
-                timeout = 30
-                waited = 0
-                while not os.path.exists(OUTPUT_PATH) and waited < timeout:
+                for _ in range(100):
+                    if os.path.exists(OUTPUT_PATH):
+                        break
                     time.sleep(0.3)
-                    waited += 0.3
 
-                if not os.path.exists(OUTPUT_PATH):
-                    st.error("Analysis failed: output file not created.")
-                    st.stop()
-
+            # save to session
             if "analysis_result" not in st.session_state:
                 st.session_state["analysis_result"] = {}
-          
 
             with open(OUTPUT_PATH, "r", encoding="utf-8") as f:
                 st.session_state["analysis_result"][selected_project["project_id"]] = json.load(f)
 
             st.success("Analysis complete!")
 
-        # ----------------------
-        # SHOW UI AFTER ANALYSIS
-        # ----------------------
-        if "analysis_result" in st.session_state and "selected_project" in st.session_state:
-            result = st.session_state["analysis_result"][selected_project["project_id"]]
+    # ---- SHOW RESULT IF PROJECT EXISTS IN SESSION ----
+    if "selected_project" in st.session_state:
+        proj = st.session_state["selected_project"]
+        pid = proj["project_id"]
+
+        if "analysis_result" in st.session_state and pid in st.session_state["analysis_result"]:
+            result = st.session_state["analysis_result"][pid]
 
             st.header("Role-based Result Viewer")
-
             roles = [r["role_name"] for r in result["roles"]]
             selected_role = st.selectbox("Select Role", roles)
 
             role_data = next(r for r in result["roles"] if r["role_name"] == selected_role)
             candidates = role_data["candidates"]
 
-            st.subheader(f"Candidates for {selected_role}")
-
-            print(candidates[0])
-
             table_rows = [
                 {
                     "Employee": c["name"],
                     "Final Score": c["final_score"],
-                    "Domain Score": c["per_matcher"]["domain"]['score'],
-                    "Skill Score": c["per_matcher"]["skill"]['score'],
+                    "Domain Score": c.get("per_matcher", {}).get("domain", {}).get("score", 0),
+                    "Skill Score": c.get("per_matcher", {}).get("skill", {}).get("score", 0),
                     "Experience Year": c["experience_years"],
                 }
                 for c in candidates
             ]
 
             st.dataframe(table_rows, use_container_width=True)
-
-            # Candidate Detail
-            st.subheader("Candidate Details")
-            selected_employee = st.selectbox("Select Employee", [c["name"] for c in candidates])
-            person = next(c for c in candidates if c["name"] == selected_employee)
-
-            st.markdown(f"### 📌 {selected_employee}")
-            # st.write(f"**Experience:** {person['experience_years']} years")
-            # st.write(f"**Final Score:** {person['final_score']}")
-            # st.write(f"**Note Score:** {person['note_score']}")
-
-            st.subheader("Matcher Breakdown")
-            for k, v in person["per_matcher"].items():
-                with st.expander(f"🔹 {k}"):
-                    st.write("Score:", v["score"])
-                    st.write("Reason:", v["reason"])

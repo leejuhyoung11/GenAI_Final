@@ -35,7 +35,15 @@ class MatchingState(TypedDict):
 ########################################################################3
 
 class ResumeState(TypedDict):
-    file_content: bytes | None
-    extracted_text: str | None
-    parsed_employee_json: dict | None
+    """
+    State used in the resume ingestion workflow.
+
+    - file_content: raw PDF bytes
+    - extracted_text: plain text extracted from the PDF
+    - parsed_employee_json: structured EmployeeProfile dict
+    - success: whether pipeline finished OK
+    """
+    file_content: Optional[bytes]
+    extracted_text: Optional[str]
+    parsed_employee_json: Optional[Dict[str, Any]]
     success: bool

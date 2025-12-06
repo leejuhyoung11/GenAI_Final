@@ -54,6 +54,7 @@ def domain_matcher(state: MatchingState):
 
         results = parsed.get("results", {})
 
+        print(results)
 
         # update each employee record
         for emp_id, r in results.items():
